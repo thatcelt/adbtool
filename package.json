@@ -1,0 +1,40 @@
+{
+  "name": "adbtool",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/index.js",
+  "files": [
+    "README.MD",
+    "dist"
+  ],
+  "keywords": [
+    "adb",
+    "adbtool",
+    "android",
+    "debugging",
+    "pentest",
+    "cybersecurity",
+    "infosecurity",
+    "typescript",
+    "adbkit",
+    "root"
+  ],
+  "description": "ADB toolkit for NodeJS, TypeScript",
+  "homepage": "https://github.com/thatcelt/adbtool#readme",
+  "bugs": {
+    "url": "https://github.com/thatcelt/adbtool/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thatcelt/adbtool.git"
+  },
+  "license": "MIT",
+  "author": "celt_is_god",
+  "type": "commonjs",
+  "scripts": {
+    "test": "tsc && cd dist/ && node index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
