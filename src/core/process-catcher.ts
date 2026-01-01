@@ -5,7 +5,9 @@ export class ProcessCatcher {
     this.__path = path;
   }
 
-  private __handleSTD = async () => {};
+  get path(): string {
+    return this.__path;
+  }
 
-  public shell = async () => {};
+  public shell = async (args: string[]) => {};
 }
