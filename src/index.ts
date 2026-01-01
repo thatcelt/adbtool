@@ -1,6 +1,2 @@
-import { AdbTool } from './core/adbtool';
-
-(async () => {
-  const adb = new AdbTool({ enableLogging: true });
-  console.log(await adb.device());
-})();
+export { AdbTool } from './core/adbtool';
+export * from './schemas/index';
