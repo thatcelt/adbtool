@@ -1,3 +1,8 @@
+import { exec, ExecOptions } from '@actions/exec';
+
+import { DEFAULT_LISTENERS } from '../constants';
+import { LOGGER } from '../utils/logger';
+
 export class ProcessCatcher {
   private __path: string;
 
@@ -9,5 +14,22 @@ export class ProcessCatcher {
     return this.__path;
   }
 
-  public shell = async (args: string[]) => {};
+  public shell = async (args: string[]): Promise<string> => {
+    let stdout = '';
+
+    const options: ExecOptions = {
+      listeners: {
+        stdout: (data: Buffer) => {
+          stdout += data.toString();
+        },
+        ...DEFAULT_LISTENERS,
+      },
+      silent: true,
+    };
+
+    await exec(this.__path, args, options);
+    LOGGER.info({ stdout }, 'Command sent');
+
+    return stdout;
+  };
 }
