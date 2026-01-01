@@ -36,5 +36,11 @@
   },
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@actions/exec": "^2.0.0",
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.3",
+    "zod": "^4.3.4"
   }
 }
