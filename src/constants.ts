@@ -1,3 +1,4 @@
+import * as props from '../values/props.json';
 import { AdbToolException } from './utils/exceptions';
 
 export const ABSOLUTE_ADB_PATH = 'adb';
@@ -8,3 +9,5 @@ export const DEFAULT_LISTENERS = {
       throw new AdbToolException(data.toString());
   },
 };
+
+export const PROPS_COMMANDS = props;

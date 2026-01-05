@@ -1,6 +1,7 @@
-import { ABSOLUTE_ADB_PATH } from '../constants';
+import { ABSOLUTE_ADB_PATH, PROPS_COMMANDS } from '../constants';
 import { AdbToolConfig } from '../schemas/config';
 import { Device } from '../schemas/device';
+import { PropsMapKey, PropsTypeMap, PropsTypeMapSchema } from '../schemas/maps';
 import { AdbToolException } from '../utils/exceptions';
 import { parseDevice } from '../utils/helpers';
 import initLogger from '../utils/logger';
@@ -45,5 +46,16 @@ export class AdbTool {
     }
 
     return parseDevice(deviceRaw);
+  };
+
+  public getProp = async <T extends PropsMapKey>(
+    prop: T,
+  ): Promise<PropsTypeMap[T]> => {
+    const rawProp = await this.__processCatcher.shell([
+      'shell',
+      `getprop ${PROPS_COMMANDS[prop]}`,
+    ]);
+
+    return PropsTypeMapSchema.shape[prop].parse(rawProp) as PropsTypeMap[T];
   };
 }
