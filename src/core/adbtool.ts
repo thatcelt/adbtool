@@ -1,4 +1,8 @@
 import { ABSOLUTE_ADB_PATH, PROPS_COMMANDS } from '../constants';
+import { InterController } from '../controllers/inter-controller';
+import { NetController } from '../controllers/net-controller';
+import { PackageController } from '../controllers/package-controller';
+import { SystemController } from '../controllers/system-controller';
 import { AdbToolConfig } from '../schemas/config';
 import { Device } from '../schemas/device';
 import { PropsMapKey, PropsTypeMap, PropsTypeMapSchema } from '../schemas/maps';
@@ -11,6 +15,11 @@ export class AdbTool {
   private __config: AdbToolConfig;
   private __processCatcher: ProcessCatcher;
 
+  private __packageController?: PackageController;
+  private __netController?: NetController;
+  private __interController?: InterController;
+  private __systemController?: SystemController;
+
   constructor(config: AdbToolConfig = {}) {
     this.__config = config;
     this.__processCatcher = new ProcessCatcher(
@@ -22,6 +31,40 @@ export class AdbTool {
 
   get path(): string {
     return this.__processCatcher.path;
+  }
+
+  get packages() {
+    if (!this.__packageController) {
+      return (this.__packageController = new PackageController(
+        this.__processCatcher,
+      ));
+    }
+    return this.__packageController;
+  }
+
+  get net() {
+    if (!this.__netController) {
+      return (this.__netController = new NetController(this.__processCatcher));
+    }
+    return this.__netController;
+  }
+
+  get inter() {
+    if (!this.__interController) {
+      return (this.__interController = new InterController(
+        this.__processCatcher,
+      ));
+    }
+    return this.__interController;
+  }
+
+  get system() {
+    if (!this.__systemController) {
+      return (this.__systemController = new SystemController(
+        this.__processCatcher,
+      ));
+    }
+    return this.__systemController;
   }
 
   public connect = async () => {
