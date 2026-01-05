@@ -23,14 +23,22 @@ export class AdbTool {
     return this.__processCatcher.path;
   }
 
-  public start = async () => {
-    return await this.__processCatcher.shell(['start-server']);
+  public connect = async () => {
+    await this.__processCatcher.shell(['start-server']);
+  };
+
+  public shell = async (command: string[]): Promise<string> => {
+    return await this.__processCatcher.shell(command);
   };
 
   public device = async (): Promise<Device> => {
-    const deviceRaw = (
-      await this.__processCatcher.shell(['devices', '-l'])
-    ).slice(26);
+    const shellResult = await this.__processCatcher.shell(['devices', '-l']);
+
+    if (shellResult.includes('unauthorized')) {
+      throw new AdbToolException('Device unauthorized');
+    }
+
+    const deviceRaw = shellResult.slice(26);
 
     if (!deviceRaw.slice(2)) {
       throw new AdbToolException('Devices not found');
