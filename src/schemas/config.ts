@@ -1,7 +1,8 @@
 import z from 'zod';
 
 export const AdbToolConfigSchema = z.object({
-  path: z.string().optional(),
+  adb: z.string().optional(),
+  sdcard: z.string().optional(),
   enableLogging: z.boolean().optional(),
 });
 

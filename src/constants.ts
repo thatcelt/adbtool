@@ -2,6 +2,7 @@ import * as props from '../values/props.json';
 import { AdbToolException } from './utils/exceptions';
 
 export const ABSOLUTE_ADB_PATH = 'adb';
+export const SDCARD_PATH = '/sdcard';
 
 export const DEFAULT_LISTENERS = {
   stderr: (data: Buffer) => {

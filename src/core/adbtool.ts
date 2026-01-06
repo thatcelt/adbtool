@@ -1,4 +1,4 @@
-import { ABSOLUTE_ADB_PATH, PROPS_COMMANDS } from '../constants';
+import { ABSOLUTE_ADB_PATH, PROPS_COMMANDS, SDCARD_PATH } from '../constants';
 import { InterController } from '../controllers/inter-controller';
 import { NetController } from '../controllers/net-controller';
 import { PackageController } from '../controllers/package-controller';
@@ -22,9 +22,7 @@ export class AdbTool {
 
   constructor(config: AdbToolConfig = {}) {
     this.__config = config;
-    this.__processCatcher = new ProcessCatcher(
-      config.path || ABSOLUTE_ADB_PATH,
-    );
+    this.__processCatcher = new ProcessCatcher(config.adb || ABSOLUTE_ADB_PATH);
 
     initLogger(!!this.__config.enableLogging);
   }
@@ -36,6 +34,7 @@ export class AdbTool {
   get packages() {
     if (!this.__packageController) {
       return (this.__packageController = new PackageController(
+        this.__config.sdcard || SDCARD_PATH,
         this.__processCatcher,
       ));
     }
