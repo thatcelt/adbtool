@@ -27,7 +27,7 @@ export class ProcessCatcher {
       silent: true,
     };
 
-    await exec(this.__path, args, options);
+    await exec(this.__path, args.filter(Boolean), options);
     LOGGER.info({ stdout }, 'Command sent');
 
     return stdout;

@@ -10,4 +10,10 @@ export const DEFAULT_LISTENERS = {
   },
 };
 
+export const PACKAGE_MAP = {
+  all: '',
+  system: '-s',
+  'third-party': '-3',
+};
+
 export const PROPS_COMMANDS = props;
