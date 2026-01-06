@@ -90,7 +90,7 @@ export class AdbTool {
     return parseDevice(deviceRaw);
   };
 
-  public getProp = async <T extends PropsMapKey>(
+  public prop = async <T extends PropsMapKey>(
     prop: T,
   ): Promise<PropsTypeMap[T]> => {
     const rawProp = await this.__processCatcher.shell([
