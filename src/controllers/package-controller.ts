@@ -1,11 +1,10 @@
 import { PACKAGE_MAP } from '../constants';
 import { ProcessCatcher } from '../core/process-catcher';
-import { Controller } from '../interfaces/controller';
 import { PackageType } from '../schemas/public';
 import { toSplitLines } from '../utils/utils';
 
-export class PackageController implements Controller {
-  __processCatcher: ProcessCatcher;
+export class PackageController {
+  private __processCatcher: ProcessCatcher;
 
   constructor(processCatcher: ProcessCatcher) {
     this.__processCatcher = processCatcher;
